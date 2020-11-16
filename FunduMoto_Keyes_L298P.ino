@@ -32,7 +32,7 @@ void setup()
     Serial.write("\nSETUP finalizado");
     tone(Buzzer, 1000, 250);
     delay(250);
-    tone(Buzzer, 1000, 250);
+    tone(Buzzer, 1500, 250);
 } 
  
 void loop() 
@@ -57,30 +57,29 @@ void loop()
     if ( string == "FRENTE" ){
         Serial.write("\nFrente");
         frenteTotal();
-        myservo.write(90);
     } else if (string == "TRAS"){
         Serial.write("\nTras");
         trasTotal();
-        myservo.write(90);
     } else if (string == "DIREITA"){
         Serial.write("\nGirar Horario");
         girarHorario();
-        myservo.write(0);
     } else if (string == "ESQUERDA"){
         Serial.write("\nGirar Anti-Horario");
         girarAnteHorario();
-        myservo.write(180);
     } else if (string == "PARAR"){
         Serial.write("\nParar");
         parar();
-        myservo.write(90);
+    } else if (string.substring(0,1) == "V"){       
+       Serial.write("\nServo em ");
+       Serial.print(string.substring(1).toInt());
+       myservo.write(string.substring(1).toInt());
     } else {
         
         tone(Buzzer, 200, 250);        
         delay(500);
         tone(Buzzer, 500, 250);
         delay(250);        
-        Serial.print("\nComando não encontrado: ");        
+        Serial.print((String)"\nComando não encontrado: ");        
         Serial.print(string);
         
     }
